@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Town Map</title>
+
+    <style>
+        html, body {
+            display: block;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            flex-direction: row;
+        }  
+
+        .b1 {
+            border-bottom: 5px double black;
+            height: 100px;
+            font-family: "MS Mincho", sans-serif; /* 明朝体フォントを指定 */
+            font-size: 20px; /* 文字の大きさを40pxに設定 */
+            color: black; /* 文字の色を黒に設定 */
+            text-align: center; /* 中央揃えに設定 */
+            background-color:antiquewhite;
+        }
+        
+        .b1 h1{
+            margin:0;
+        }
+
+        .b2 {
+            border-right: 5px double black;
+            min-width: 960px;
+            width: 50vw;
+            height: calc(100vh - 104px);  
+        }
+
+        .b3 {
+            display:block;
+            width: 50vw;
+        }
+
+        .b4 {
+            display: flex;
+            background-color:lightyellow;
+        }
+
+        .table1{
+            width: 95%;
+            height:20%;
+            border: 2px solid black;
+            letter-spacing: 1px;
+            font-family: sans-serif;
+            font-size: 16px;
+            border-collapse: collapse;
+            margin-left:20px;
+            margin-top:120px;
+        }
+
+        .table1 tr,.table1 td {
+            height: 5px;
+            border: 1px solid black;
+            padding: 7px 7px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .table2{
+            width: 95%;
+            height: 20%;
+            border: 2px solid black;
+            letter-spacing: 1px;
+            font-family: sans-serif;
+            font-size: 16px;
+            border-collapse: collapse;
+            margin-left:20px;
+        }
+
+        .table2 tr,.table2 td {
+            height: 5px;
+            border: 1px solid black;
+            padding: 7px 7px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .table2 td:nth-child(2) {
+            border-right: none; /* .table1内の2列目の右側の境界線を非表示にする */
+        }
+        .a{
+           background-color: sandybrown;  
+        }
+        
+        .b{
+           background-color: blue; 
+        }
+        
+        .c{
+           background-color: rgb(237, 108, 108);  
+        }
+
+        .d{
+           background-color: white;  
+        }
+
+        .e{
+           background-color: rgb(237, 108, 108);  
+        }
+        
+        .f{
+           background-color: rgb(0, 217, 255);  
+        }
+
+        .rectangle1{
+            color:sandybrown; /*周りを黒で囲う*/
+        }
+        
+        .rectangle2{
+            color:rgb(237, 108, 108);
+        }
+        
+        .rectangle4{
+            color:black;
+        }
+        
+        .rectangle5{
+            color:blue;
+        }
+        
+        .rectangle6{
+            color:rgb(0, 217, 255);
+        }
+    
+        .b3text{
+            margin-top: 5px;
+            margin-left: 17px;
+            font-weight: bold;
+            font-family:sans-serif;
+            font-size:18px; 
+        }
+        
+        div.b3text p > span.row-dots, div.b3text p {
+            margin-bottom: 45px;
+        }
+        #rect{
+            position: fixed;
+            bottom:10px;
+            right:10px;
+            font-size: 20px;
+            font-weight: bold;
+            border-top:2px solid black;
+            border-right: 2px solid black;
+            border-left: 2px solid black;
+            border-bottom:2px solid black;
+            background-color:whitesmoke;
+        }
+        #rect p {
+        margin: 10px 0; /* 段落間の余白を調整 */
+        }
+     
+        #streat{
+            margin-top:20px;
+            margin-bottom:20px;
+            text-align:center;
+        }
+
+    </style>
+         
+</head>
+
+<body>  
+    <div class="b1" id="content1"><!--大見出し-->
+        <h1 style= "padding-top:30px">徳山駅前商店街PH通りマップ</h1> 
+    </div>
+
+    <div class="b4">
+        <div class="b2" id="content1"><!--右側のパネルの設定-->
+            <table class="table1"> 
+                <tr><!--１行目（excelで作成した商店街マップの縦の番号を参照）-->
+                    <td data-tag="1" class="e" rowspan="2" width="3.5%" height="100px" >無有の木</td>
+                    <td data-tag="2" class="d" rowspan="2" width="3.5%">エフィ</td>
+                    <td data-tag="3" class="d" width="7%">メンズゼロ</td>
+                    <td data-tag="4" class="e" rowspan="2" width="3.5%">F&スポーツ</td>
+                    <td data-tag="5" class="e" rowspan="2" width="3.5%">ラシェル</td>
+                    <td data-tag="6" class="e" rowspan="2" width="1.8%">kaju</td>
+                    <td data-tag="7" class="b" rowspan="2" width="3.5%"></td>
+                    <td data-tag="8" class="e" rowspan="2" width="3.5%">Talking a Lesson for the past</td>
+                    <td data-tag="9" class="f" rowspan="2" width="3.5%">月極</td>
+                    <td data-tag="10" class="e" rowspan="2" width="3.5%">トゥービーズ</td>
+                    <td data-tag="12" class="f" colspan="2" width="14%">1F奥駐車場</td>
+                    <td data-tag="13" class="a" colspan="2" width="7%">2FバーY</td>
+                </tr>
+                <tr>
+                    <td data-tag="14" class="b"></td><!--２行目-->
+                    <td data-tag="15" class="b" colspan="2"></td><!--３行目-->
+                    <td data-tag="16" class="d"colspan="2">マキ美容院</td><!--４行目-->
+                </tr>
+            </table>
+                    
+            <p data-tag="17" id="streat">PH通り</p>
+                
+            <table class="table2">     
+                <tr><!--７行目-->
+                <td data-tag="18" class="d" rowspan="3" width="10.5%" height="75px">西京銀行</td>
+                    <td data-tag="19" class="d" rowspan="4" width="10.5%">大華不動産</td>
+                    <td data-tag="36" class="f" rowspan="4" width="3.5%" ></td><!--若宮町有料P１-->
+                    <td data-tag="20" class="e" rowspan="2" width="3.5%" style="font-size: 10px;">RAT HOLE</td>
+                    <td data-tag="21" class="a" rowspan="2" width="3.5%" style="font-size: 10px;">PHカフェ</td>
+                    <td data-tag="22" class="a" rowspan="4" width="3.5%" >じっとこ</td>
+                    <td data-tag="23" class="e" rowspan="4" width="3.5%" >ストーンズ</td>
+                    <td data-tag="24" class="f" rowspan="4" colspan="2"width="7%" >契約P</td>
+                    <td data-tag="25" class="a" rowspan="4" width="3.5%" >夜喫茶雫</td>
+                    <td data-tag="26" class="a" rowspan="4" width="3.5%" >７番酒場</td>
+                    <td data-tag="27" class="d" rowspan="5" colspan="2"width="7%" height="125px">ファーストリニック</td>
+                    <td data-tag="28" class="e" colspan="3" width="10.5%" height="25px">ハローズ</td>
+                </tr>
+                <tr><!--８行目-->
+                    <td data-tag="29" class="d" colspan="3" width="10.5%" height="25px">木村薬局</td>
+                <tr><!--９行目-->
+                    <td data-tag="30" class="b"rowspan="2" width="3.5%" ></td>
+                    <td data-tag="31" class="e" rowspan="2" width="3.5%" >ブリア</td>
+                    <td data-tag="32" class="a"colspan="3" width="10.5%" height="25px">香和</td>
+                </tr>
+                <tr><!--１０行目-->
+                    <td data-tag="33" class="e" width="10.5%" height="25px">Jo conde</td>
+                    <td data-tag="34" class="a"colspan="3" width="10.5%" height="25px">大吉丸</td>
+                </tr>
+                <tr><!--１１行目-->
+                    <td data-tag="35" class="b" width="10.5%" height="25px"></td>
+                    <td data-tag="36" class="f" colspan="3" width="10.5%" height="25px"></td><!--若宮町有料P２-->
+                    <td data-tag="36" class="f" rowspan="3"colspan="7" width="24.5%" height="75px">若宮町有料P</td>
+                    <td data-tag="38" class="f"colspan="3" width="10.5%" height="25px">契約P</td>
+                </tr>  
+                <tr><!--１２行目-->
+                    <td data-tag="39" class="b" rowspan="2" width="10.5%" height="50px"></td>
+                    <td data-tag="40" class="d" rowspan="4" colspan="2" width="10.5%">マリー</td>
+                    <td data-tag="41" class="a" rowspan="2" width="3.5%">ふじ荘</td>
+                    <td data-tag="42" class="b" rowspan="2" width="30px" height="50px"></td>
+                    <td data-tag="43" class="b" rowspan="2" width="30px" height="50px"></td>
+                    <td data-tag="44" class="d"colspan="3" width="10.5%" height="25px">サムラビル</td>
+                </tr> 
+                <tr><!--１３行目-->  
+                    <td data-tag="45" class="b" rowspan="1" colspan="3" width="10.5%" height="25px"></td>
+                </tr>
+            
+            </table>
+        </div>
+        
+        <div class="b3text" id="b3Content">
+            <p><span class="row-dots">・</span>店舗名</p>
+            <p><span class="row-dots">・</span>情報発信の仕方</p>
+            <p><span class="row-dots">・</span>ターゲット層</p>
+            <p><span class="row-dots">・</span>障がいを抱えていらっしゃる方への対応</p>
+            <p><span class="row-dots">・</span>バリアフリーの捉え方</p>
+        </div>
+        
+        <br><br><br><br><br><br><br><br><br><br><br>
+        
+        <div id="rect"> 
+            <p><span class="rectangle1">■</span>飲食店</p>
+            <p><span class="rectangle2">■</span>物販</p>
+            <p><span class="rectangle4">□</span>サービス・医療・薬局</p>
+            <p><span class="rectangle5">■</span>空き店舗</p>
+            <p><span class="rectangle6">■</span>駐車場・空地</p>
+        </div>
+
+    </div>
+    <audio id="audio2">
+        <source src="無有の木.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio2">
+        <source src="エフィ.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio3">
+        <source src="メンズゼロ.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio4">
+        <source src="F&.スポーツ.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio5">
+        <source src="ラシェル.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio6">
+        <source src="kaju.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio7">
+        <source src="Talking a Lesson for the past" type="audio/mpeg">
+    </audio>
+    <audio id="audio8">
+        <source src="月極.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio9">
+        <source src="トゥービーズ.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio10">
+        <source src="１F奥駐車場.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio10">
+        <source src="２FバーY.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio11">
+        <source src="マキ美容院.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio12">
+        <source src="西京銀行.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio13">
+        <source src="大華不動産.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio14">
+        <source src="RATHOLE.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio15">
+        <source src="PHカフェ.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio16">
+        <source src="じっとこ.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio17">
+        <source src="ストーンズ.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio18">
+        <source src="契約P.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio19">
+        <source src="夜喫茶雫.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio20">
+        <source src="7番酒場.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio21">
+        <source src="ファーストクリニック.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio22">
+        <source src="ハローズ.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio23">
+        <source src="木村薬局.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio24">
+        <source src="ブリア.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio25">
+        <source src="香和.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio26">
+        <source src="Jo conde.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio27">
+        <source src="大吉丸.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio28">
+        <source src="若宮有料P.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio29">
+        <source src="麻雀.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio30">
+        <source src="ふじ荘.mp3" type="audio/mpeg">
+    </audio> 
+    <audio id="audio31">
+        <source src="サムラビル.mp3" type="audio/mpeg">
+    </audio>  
+
+    <script >  
+    
+    const element = document.getElementById("content1");
+        console.log(element.getAttribute('id'));
+
+        window.addEventListener('load', function(){
+        document.getElementById("content1").addEventListener('click', logPosition);
+        });
+
+        function logPosition(event) {
+        console.log("clientX: " + event.clientX);
+        console.log("clientY: " + event.clientY);
+        console.log("pageX: " + event.pageX);
+        console.log("pageY: " + event.pageY);
+        }
+
+        var b3Content = document.getElementById('b3Content');
+        var cells = document.querySelectorAll('td[data-tag]');
+        var picture = document.getElementById('picture');
+        var currentAudio = null; // 現在再生中のオーディオ
+
+        //ここに店舗情報を追加
+        var storeInfo = {
+                        '1': {name:'無有の木',audio:'無有の木.mp3'},
+                        '2': {name:'エフィ',audio:'エフィ.mp3',},
+                        '3': {name:'メンズゼロ',audio:'メンズゼロ.mp3'},
+                        '4':  {name:'F&スポーツ',audio:'F&.スポーツ.mp3'},
+                        '5': {name:'ラシェル',audio:'ラシェル.mp3'},
+                        '6': {name:'kaju',audio:'kaju.mp3'},
+                        '7': '',
+                        '8': {name:'Talking a Lesson for tha past',audio:'Talking a Lesson for the past.mp3'},
+                        '9': {name:'月極',audio:'月極.mp3',},
+                        '10': {name:'トゥービーズ',audio:'トゥ―ビーズ.mp3'},
+                        '12': {name:'１F奥駐車場',audio:'１F奥駐車場.mp3'},
+                        '13': {name:'2FバーY',audio:'２FバーY.mp3'},
+                        '14': '',
+                        '15': '',
+                        '16': {name:'マキ美容院',audio:'マキ美容院.mp3'},
+                        '18': {name:'西京銀行',audio:'西京銀行.mp3'},
+                        '19': {name:'大華不動産',audio:'大華不動産.mp3'},
+                        '20': {name:'RAT HOLE',audio:'RATHOLE.mp3',},
+                        '21': {name:'PHカフェ',audio:'PHカフェ.mp3'},
+                        '22': {name:'じっとこ',audio:'じっとこ.mp3'},
+                        '23': {name:'ストーンズ',audio:'ストーンズ.mp3'},
+                        '24': {name:'契約P',audio:'契約P.mp3'},
+                        '25': {name:'夜喫茶雫',audio:'夜喫茶雫.mp3'},
+                        '26': {name:'７番酒場',audio:'７番酒場.mp3'},
+                        '27': {name:'ファーストクリニック',audio:'ファーストクリニック.mp3'},
+                        '28': {name:'ハローズ',audio:'ハローズ.mp3'},
+                        '29': {name:'木村薬局',audio:'木村薬局.mp3'},
+                        '30': '',
+                        '31': {name:'ブリア',audio:'ブリア.mp3'},
+                        '32': {name:'香和',audio:'香和.mp3'},
+                        '33': {name:'Jo conde',audio:'Jo conde.mp3'},
+                        '34': {name:'大吉丸',audio:'大吉丸.mp3'},
+                        '35': '',
+                        '36': {name:'若宮有料P',audio:'若宮有料P.mp3'},
+                        '37': '',
+                        '38': {name:'契約P',audio:'契約P.mp3'},
+                        '39': '',
+                        '40': {name:'麻雀',audio:'麻雀.mp3'},
+                        '41': {name:'ふじ荘',audio:'ふじ荘.mp3'},
+                        '42': '',
+                        '43': '',
+                        '44': {name:'サムラビル',audio:'サムラビル.mp3'},
+                        '45': '',
+                    };
+
+  
+        // マウスオーバー時の処理を追加
+        cells.forEach(function(cell) {
+            cell.addEventListener('mouseover', function(event) {
+                // セルのdata-tag属性からタグを取得
+                var tag = cell.getAttribute('data-tag');
+                
+                function playAudio(audioFileName) {
+                if (currentAudio) {
+                    console.log('Pausing current audio');
+                    currentAudio.pause();
+                }
+                var audio = new Audio('sound/'+audioFileName);
+                audio.play().catch(function (error) {
+                console.error('Failed to play audio:', error);
+                });
+                // オーディオが再生終了したときの処理
+                audio.addEventListener('ended', function () {
+                    currentAudio = null;
+                });
+                currentAudio = audio;
+                }
+                
+            if (tag in storeInfo) {
+                var info = storeInfo[tag];
+                console.log('Current info:', info); // 現在の情報をコンソールに記録
+
+                if (info.name) {
+                    b3Content.innerHTML = '<span class="row-dots">・</span>' + info.name;
+                } else if (info.audio) {
+                    playAudio(info.audio);
+                } else if (info.image) {
+                    console.log('Setting image source:', info.image);
+                    // 画像の表示には src 属性を使用
+                    document.getElementById('picture').src = info.image;
+                    b3Content.innerHTML = '<img src="' + info.image + '">';
+                }
+            } else {
+                console.log('Tag not found in storeInfo:', tag); // タグが 'storeInfo' に見つからない場合にメッセージを記録
+            }
+            
+            if (tag == "1") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>無有の木';
+            } else if (tag == "2") {                                   
+                b3Content.innerHTML = '<span class="row-dots">・</span>エフィ―';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span><span style="color: red;">広告は出していません</span>';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>常連客をターゲット層としており、20代から30代女性をターゲット層としていますが、実際は70%が20代男性の利用客になります。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>自作のスロープであったり、視覚障害の方には筆談で対応しております。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>スロープはなるべく付けたほうがよいと考えています。当店はgoogleサイトにはバリアフリー対応の店舗として掲載されています。';
+            } else if (tag == "3") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>メンズゼロ';
+            } else if (tag == "4") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>F&スポーツ';
+            } else if (tag == "5") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>ラシェル';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span><span style="color: red;">あと数年で店を閉じるので特にしていません。</span>';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>20代から60代の常連客を対象としています。 ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>店主が障がいを抱えており、出来ることがあればお手伝いいたします。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>店としてはできていないバリアフリーは大切だとは思っています。';
+            } else if (tag == "6") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>kaju';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>インスタグラムを主に使っています';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>常連客を対象としています。 ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>店が狭いので入り口で対応させていただきます。また配送サービスで自宅配送が可能です。 ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>店や道路に出来ればしてほしいと考えています。 ';
+            } else if (tag == "7") {
+            } else if (tag == "8") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>Talking a Lesson for the past';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>インスタグラムを主として活用しており、ホームページもあります。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>20代前半から30代半ばの男性に多くご利用頂いています。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>車いすの人には段差解消のお手伝いし、聴覚障がい者の方には筆談で対応させていただきます。視覚障がいに対しては検討中です。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>入口に段差がなければ利用しやすいと思います。';
+            } else if (tag == "9") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>月極';
+            } else if (tag == "10") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>トゥービーズ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>SNS・市のフリーペーパーで情報発信をしています。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>20代から30代が主で子供服が6割占めています。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>必要な時に介助いたします。また、入口に段差あります。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>入口が狭いのでそこを改善指定しています。';
+            } else if (tag == "12") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>1F奥駐車場';
+            } else if (tag == "13") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>バーY';
+            } else if (tag == "16") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>マキ美容院';
+            } else if (tag == "17") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>PH通り';
+            } else if (tag == "18") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>西京銀行';
+            } else if (tag == "19") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>大華不動産';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>新聞広告で情報発信をしており、ホームページもあります ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>高齢者（顔なじみ）が多く、主に産運用の相談に乗ります ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span><span style="color: red;">障害がある方が一人で借りることには抵抗があります</span>';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>杖は用意してあります。';
+            } else if (tag == "20") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>RAT HOLE';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>オンラインショップやインスタグラムで情報を発信しています。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>30代から60代の固定のお客様が多いです';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>アパレルは、視覚障がいには伝え方が難しいです。しかしながら聴覚障がい者に対しては筆談、肢体不自由者には、商品を持ってきて説明するなどしております。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>バリアフリーについては手が付けられていない現状にあります。';
+            } else if (tag == "21") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>PHカフェ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>インスタグラムやフェイスブックです。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>10代から70代 になります・';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>視覚障がいの方は席まで声掛けを行います。また聴覚障がいの方は筆談をするなどし、来店時から退店までできるだけの支援を行います。 ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>車いすの人が利用しやすいように工夫したいのでが店が縦長なので席を増やしすぎないように気を付けています。';
+            } else if (tag == "22") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>じっとこ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>サンデー周南や、たべログ、PaiPaiグルメ ホットペッパーなどで情報を発信しています。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>20代から幅広いお客様にご利用いただいてます。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>相手に添う形で邪魔にならぬよう、補助の方の補助をさせていただきます。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>最初の段階では考えていないので後付けになりますが、必要に応じて設置する予定です。';
+            } else if (tag == "23") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>ストーンズ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>ブログやインスタグラムfacebook、口コミで情報発信をしています。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>小さい子から高齢者まで幅広い世代の方にご利用いただいています。 ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>声が出せない場合は筆談、視覚障がいの方は付き添いの人の支援（本人が嫌でなければ触れたりし支援する）をさせていただきます。また、車いすの方は段差まで迎えに参ります。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>段差をどうにかしたいと考えています。';
+            } else if (tag == "24") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>契約パーキング';
+            } else if (tag == "25") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>夜喫茶雫';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>インスタグラムを主に利用しています。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>10代から20代の女性で、8割ほどは女性にご利用いただいています。 ';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>お客様の障がいに合わせ、柔軟に対応を致します。 。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>バリアフリーは必要である上、続けた方が良いと考えます 。';
+            } else if (tag == "26") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>７番酒場';
+            } else if (tag == "27") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>徳山ファストクリニック';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span><span style="color: red;">ホームページの予約システムから情報発信をしています。</span>';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>50代から60代のご高齢な方にご利用いただいております。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>視覚障がいの方は付き人の補助をし、聴覚障がいの方は直接声をかけ中に入っていただくなどの対応をさせていただいております。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>障害者だけでなく子供にも対応できるよう段差の解消や自動ドアが必要だと感じます。';
+            } else if (tag == "28") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>ハローズ';
+            } else if (tag == "29") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>木村薬局';
+            } else if (tag == "31") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>ブリア';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>ホームページやホットペッパービューティーで情報を発信しています。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>20代から60代と幅広いお客様にご利用いただいてます';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>付き添いの方のお手伝いをさせていただきます。';
+                b3Content.innerHTML += '<br><br><span class="row-dots">・</span>バリアフリーは必要だと考えております。';
+            } else if (tag == "32") {
+                b3Content.innerHTML = '<span class="row-dots">・</span香和';
+            } else if (tag == "33") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>Jo conde';
+            } else if (tag == "34") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>大吉丸';
+            } else if (tag == "36") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>若宮有料駐車場';
+            } else if (tag == "40") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>高級麻雀クラブ マリー';
+            } else if (tag == "41") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>ふじ荘';
+            } else if (tag == "44") {
+                b3Content.innerHTML = '<span class="row-dots">・</span>サムラビル';
+            }    
+            
+            b3Content.style.display = 'block';
+
+            cell.addEventListener('click', function () {
+                var audioFileName = storeInfo[tag].audio;;
+                playAudio(audioFileName);
+            });
+
+            // 店舗情報を縦のリスト形式で表示
+            b3Content.innerHTML += '<br>';
+            
+            if (storeInfo[tag] && typeof storeInfo[tag] === 'object' && storeInfo[tag].audio) {
+                if (storeInfo[tag] && Array.isArray(storeInfo[tag].info)) {
+                    storeInfo[tag].info.forEach(function (info) {
+                        b3Content.innerHTML += '<span class="row-dots">・</span>' + info + '<br>';
+                    });
+                }
+            b3Content.style.display = 'block';
+            };
+
+        });
+    });
+    
+    //PH通りの部分の表示
+    const specified1XMin = 22;
+    const specified1XMax = 926;
+    const specified1YMin = 354;
+    const specified1YMax = 414;
+    //const specified2XMin = 4;
+    //const specified2XMax = 1515;
+    //const specified2YMin = 3;
+    //const specified2YMax = 91;
+    let isPHContentAdded = false;
+
+    // b3Contentが宣言され、かつこのスコープ内でアクセス可能であることを前提とする
+    document.querySelector('.b2').addEventListener("mousemove", (event) => {
+        const { clientX, clientY } = event;
+        console.log("mousemove event fired"); 
+        if (clientX >= specified1XMin && clientX <= specified1XMax &&
+            clientY >= specified1YMin && clientY <= specified1YMax &&
+            !isPHContentAdded) {
+            b3Content.innerHTML += '<span class="row-dots">・</span>PH通り';
+            console.log("isPHContentAdded is now true:", isPHContentAdded);
+            isPHContentAdded = true;
+        }
+    });
+
+    const cell = document.querySelector('.b2');
+    cell.addEventListener('mouseout', function (event) {
+        // 特定の条件下でのみ非表示
+        if (isPHContentAdded) {
+            b3Content.innerHTML = ''; 
+            console.log("isPHContentAdded is now false:", isPHContentAdded);
+            isPHContentAdded = false;
+        } else {
+            // 特定の条件に該当しない場合はデフォルトの内容にリセット
+            b3Content.innerHTML = '<span class="row-dots">・</span>店舗名';
+            b3Content.innerHTML += '<br><br><span class="row-dots">・</span>情報発信の仕方';
+            b3Content.innerHTML += '<br><br><span class="row-dots">・</span>ターゲット層';
+            b3Content.innerHTML += '<br><br><span class="row-dots">・</span>障がいを抱えていらっしゃる方への対応';
+            b3Content.innerHTML += '<br><br><span class="row-dots">・</span>バリアフリーの捉え方';
+        }
+    });
+
+    </script>
+</body>
+</html>
