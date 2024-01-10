@@ -1,1 +1,0 @@
-# Barrier-free-map-of-PH-street
